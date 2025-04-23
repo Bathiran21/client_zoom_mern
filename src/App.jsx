@@ -35,15 +35,15 @@ function App() {
         <h1 className="mb-4">Zoom App (MERN)</h1>
         <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
 
-        {!isZoom && (
+        {/* {!isZoom && (
           <button 
             onClick={handleInstallClick} 
             className="btn btn-dark my-3">
               Install App
           </button>
-        )}
+        )} */}
 
-        {isZoom && (
+        {!isZoom && (
           <div className="d-flex justify-content-between gap-3 p-3 text-white flex-wrap">
             <Link
               className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
