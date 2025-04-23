@@ -88,7 +88,7 @@ function App() {
             >
               Past Meetings
             </Link>
-            <Zoom />
+            {/* <Zoom /> */}
           </div>
         )}
 
