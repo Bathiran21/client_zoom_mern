@@ -11,7 +11,7 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
 
   useEffect(() => {
-    fetch("https:/servezoommern.onrender.com/api/zoom/is-zoom")
+    fetch("https://servezoommern.onrender.com/api/zoom/is-zoom")
       .then((res) => res.json())
       .then((data) => setIsZoom(data.isZoom));
   }, []);
