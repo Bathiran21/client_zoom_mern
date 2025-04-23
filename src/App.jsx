@@ -51,15 +51,19 @@ function App() {
   return (
     <Router>
       <div className="container mt-3 " style={{height:"90vh"}}>
-        <h1 className="mb-4">Zoom App (MERN)</h1>
-        <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
-
         {!isZoom && (
-          <button 
-            onClick={handleInstallClick} 
-            className="btn btn-dark my-3">
-              Install App
-          </button>
+
+          <div>
+            <h1 className="mb-4">Zoom App (MERN)</h1>
+            <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
+
+            <button 
+              onClick={handleInstallClick} 
+              className="btn btn-dark my-3">
+                Install App
+            </button> 
+          </div>
+
         )}
 
         {isZoom && (
