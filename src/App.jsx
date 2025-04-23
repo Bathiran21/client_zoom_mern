@@ -10,28 +10,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [isZoom, setIsZoom] = useState(null);
 
-  useEffect(() => {
-    // First, check if Zoom Apps SDK is available
-    if (window.ZoomAppsSdk) {
-      // Configure the SDK with the necessary capabilities
-      ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
+  // useEffect(() => {
+  //   // Configure the SDK with the necessary capabilities
+  //   ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
   
-      // Try to get the user context to determine if it's inside Zoom
-      ZoomAppsSdk.getUserContext()
-        .then((ctx) => {
-          console.log("Zoom context:", ctx);
-          setIsZoom(true);  // Inside Zoom
+  //   // Try to get the user context to determine if it's inside Zoom
+  //   ZoomAppsSdk.getUserContext()
+  //     .then((ctx) => {
+  //       console.log("Zoom context:", ctx);
+  //       setIsZoom(true);  // Inside Zoom
+  //     })
+  //     .catch((err) => {
+  //       console.error("Not running inside Zoom", err);
+  //       setIsZoom(false); // Not inside Zoom
+  //     });
+  // }, []);  
+  
+  useEffect(()=> {
+    async function configureApp() {
+    try{
+        const configResponse = await ZoomAppsSdk.config({
+          popoutSize: {width: 480, height: 360},
+          capabilities: ["shareApp"]
         })
-        .catch((err) => {
-          console.log("Not running inside Zoom", err);
-          setIsZoom(false); // Not inside Zoom
-        });
-    } else {
-      console.log("ZoomAppsSdk is not available.");
-      setIsZoom(false); // Not inside Zoom
+        setIsZoom(true)
+      }catch(error){
+        setIsZoom(false)
+        console.log("Error in configureApp", error)
+      }
     }
-  }, []);
-  
+
+    configureApp();
+  }, [])
   
 
   const handleInstallClick = () => {
