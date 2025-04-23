@@ -11,7 +11,7 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/zoom/is-zoom")
+    fetch("https:/servezoommern.onrender.com/api/zoom/is-zoom")
       .then((res) => res.json())
       .then((data) => setIsZoom(data.isZoom));
   }, []);
@@ -26,24 +26,24 @@ function App() {
   }, [isZoom]);
 
   const handleInstallClick = () => {
-    window.location.href = "https://servezoommern.vercel.app";
+    window.location.href = "https://servezoommern.onrender.com/auth/install";
   };
 
   return (
     <Router>
       <div className="container mt-3 " style={{height:"90vh"}}>
-        {/* <h1 className="mb-4">Zoom App (MERN)</h1>
-        <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p> */}
+        <h1 className="mb-4">Zoom App (MERN)</h1>
+        <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
 
-        {/* {!isZoom && (
+        {!isZoom && (
           <button 
             onClick={handleInstallClick} 
             className="btn btn-dark my-3">
               Install App
           </button>
-        )} */}
+        )}
 
-        {!isZoom && (
+        {isZoom && (
           <div className="d-flex justify-content-between gap-3 p-3 text-white flex-wrap">
             <Link
               className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
