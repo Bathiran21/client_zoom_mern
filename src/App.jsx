@@ -11,19 +11,25 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
 
   useEffect(() => {
-    // First, configure the SDK with capabilities
-    ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
+    // First, check if Zoom Apps SDK is available
+    if (window.ZoomAppsSdk) {
+      // Configure the SDK with the necessary capabilities
+      ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
   
-    // Then try to get the user context
-    ZoomAppsSdk.getUserContext()
-      .then((ctx) => {
-        console.log("Zoom context:", ctx);
-        setIsZoom(true);
-      })
-      .catch((err) => {
-        console.log("Not running inside Zoom", err);
-        setIsZoom(false);
-      });
+      // Try to get the user context to determine if it's inside Zoom
+      ZoomAppsSdk.getUserContext()
+        .then((ctx) => {
+          console.log("Zoom context:", ctx);
+          setIsZoom(true);  // Inside Zoom
+        })
+        .catch((err) => {
+          console.log("Not running inside Zoom", err);
+          setIsZoom(false); // Not inside Zoom
+        });
+    } else {
+      console.log("ZoomAppsSdk is not available.");
+      setIsZoom(false); // Not inside Zoom
+    }
   }, []);
   
   
