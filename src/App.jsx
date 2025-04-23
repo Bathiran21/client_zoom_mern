@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [isZoom, setIsZoom] = useState(null);
+  const [isLoading, setIsLoading] = useState(true)
 
   // useEffect(() => {
   //   // Configure the SDK with the necessary capabilities
@@ -34,8 +35,10 @@ function App() {
           capabilities: ["shareApp"]
         })
         setIsZoom(true)
+        setIsLoading(false)
       }catch(error){
         setIsZoom(false)
+        setIsLoading(false)
         console.log("Error in configureApp", error)
       }
     }
@@ -51,7 +54,7 @@ function App() {
   return (
     <Router>
       <div className="container mt-3 " style={{height:"90vh"}}>
-        {!isZoom && (
+        {!isZoom && !isLoading && (
 
           <div>
             <h1 className="mb-4">Zoom App (MERN)</h1>
