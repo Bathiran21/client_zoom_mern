@@ -11,12 +11,6 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
 
   useEffect(() => {
-    fetch("https://servezoommern.onrender.com/api/zoom/is-zoom")
-      .then((res) => res.json())
-      .then((data) => setIsZoom(data.isZoom));
-  }, []);
-
-  useEffect(() => {
     if (isZoom) {
       ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
       ZoomAppsSdk.getUserContext().then((ctx) => {
@@ -24,6 +18,19 @@ function App() {
       });
     }
   }, [isZoom]);
+
+  useEffect(() => {
+    ZoomAppsSdk.getUserContext()
+      .then((ctx) => {
+        console.log("Zoom context:", ctx);
+        setIsZoom(true);
+      })
+      .catch((err) => {
+        console.log("Not running inside Zoom", err);
+        setIsZoom(false);
+      });
+  }, []);
+  
 
   const handleInstallClick = () => {
     window.location.href = "https://servezoommern.onrender.com/auth/install";
@@ -69,6 +76,7 @@ function App() {
             >
               Past Meetings
             </Link>
+            <Zoom />
           </div>
         )}
 
