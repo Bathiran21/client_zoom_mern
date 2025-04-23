@@ -11,15 +11,10 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
 
   useEffect(() => {
-    if (isZoom) {
-      ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
-      ZoomAppsSdk.getUserContext().then((ctx) => {
-        console.log("Zoom context:", ctx);
-      });
-    }
-  }, [isZoom]);
-
-  useEffect(() => {
+    // First, configure the SDK with capabilities
+    ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
+  
+    // Then try to get the user context
     ZoomAppsSdk.getUserContext()
       .then((ctx) => {
         console.log("Zoom context:", ctx);
@@ -30,6 +25,7 @@ function App() {
         setIsZoom(false);
       });
   }, []);
+  
   
 
   const handleInstallClick = () => {
