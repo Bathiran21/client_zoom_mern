@@ -54,7 +54,7 @@ function App() {
   return (
     <Router>
       <div className="container mt-3 " style={{height:"90vh"}}>
-        {!isZoom && !isLoading && (
+        {isZoom && !isLoading && (
 
           <div>
             <h1 className="mb-4">Zoom App (MERN)</h1>
@@ -69,7 +69,7 @@ function App() {
 
         )}
 
-        {isZoom && (
+        {!isZoom && (
           <div className="d-flex justify-content-between gap-3 p-3 text-white flex-wrap">
             <Link
               className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
