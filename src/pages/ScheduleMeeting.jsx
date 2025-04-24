@@ -59,6 +59,17 @@ function ScheduleMeeting() {
           Save
         </button>
       </form>
+      <br />
+        <h2 className='mb-4 text-start w-100'>Start New Meeting</h2>
+        <div className='border p-4 rounded shadow-sm bg-light w-100 flex-1 d-flex flex-column'>
+          <h4>Let's start a new Meeting</h4>
+          <button 
+            type='button' 
+            className='btn btn-warning mt-3 align-self-start'
+          >
+            New Meeting
+          </button>
+        </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@ const ActiveMeeting = ({ accessToken }) => {
   }, [accessToken]);
 
   if (loading) return <p>Loading active meeting...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <h4 className='text-center mt-5'>No Active Meeting</h4>;
 
   return (
     <div className="p-4 border rounded shadow-md max-w-md mx-auto">
