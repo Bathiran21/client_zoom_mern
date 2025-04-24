@@ -35,46 +35,9 @@ function App() {
   // const handleInstallClick = () => {
   //   window.location.href = "https://servezoommern.onrender.com/auth/install";
   // };
-  const handleInstallClick = async () => {
-    try {
-      const res = await fetch("https://servezoommern.onrender.com/auth/install", {
-        method: "GET",
-        credentials: "include",
-      });
-  
-      // The install route redirects — you don’t need anything here
-      console.log("Redirecting to Zoom OAuth install...");
-    } catch (error) {
-      console.error("Install error", error);
-    }
+  const handleInstallClick = () => {
+    window.location.href = "https://servezoommern.onrender.com/auth/install";
   };
-  
-
-  useEffect(() => {
-    async function checkAuthCallback() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.has("code") && params.has("state")) {
-        try {
-          const response = await fetch(`https://servezoommern.onrender.com/auth/callback?${params.toString()}`, {
-            credentials: "include",
-          });
-          const data = await response.json();
-  
-          if (data.deeplink) {
-            // ✅ Open inside Zoom client
-            await ZoomAppsSdk.openUrl({ url: data.deeplink });
-          } else {
-            console.error("No deeplink received");
-          }
-        } catch (err) {
-          console.error("OAuth Callback failed:", err);
-        }
-      }
-    }
-  
-    checkAuthCallback();
-  }, []);
-  
 
   return (
     <Router>
