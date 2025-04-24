@@ -32,9 +32,6 @@ function App() {
     configureApp();
   }, []);
 
-  // const handleInstallClick = () => {
-  //   window.location.href = "https://servezoommern.onrender.com/auth/install";
-  // };
   const handleInstallClick = () => {
     window.location.href = "https://servezoommern.onrender.com/auth/install";
   };
