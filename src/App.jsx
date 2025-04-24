@@ -18,7 +18,7 @@ function App() {
           popoutSize: { width: 480, height: 360 },
           capabilities: ["shareApp", "getUserContext", "getMeetingContext"],
         });
-        const userContext = await zoomSdk.getUserContext();
+        const userContext = await ZoomAppsSdk.getUserContext();
         console.log(userContext);
         setIsZoom(true);
         setIsLoading(false);
