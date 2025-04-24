@@ -9,28 +9,43 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [isZoom, setIsZoom] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   // Configure the SDK with the necessary capabilities
+  //   ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
+  
+  //   // Try to get the user context to determine if it's inside Zoom
+  //   ZoomAppsSdk.getUserContext()
+  //     .then((ctx) => {
+  //       console.log("Zoom context:", ctx);
+  //       setIsZoom(true);  // Inside Zoom
+  //     })
+  //     .catch((err) => {
+  //       console.error("Not running inside Zoom", err);
+  //       setIsZoom(false); // Not inside Zoom
+  //     });
+  // }, []);  
+  
+  useEffect(()=> {
     async function configureApp() {
-      try {
+    try{
         const configResponse = await ZoomAppsSdk.config({
-          popoutSize: { width: 480, height: 360 },
-          capabilities: ["shareApp", "getUserContext", "getMeetingContext"],
-        });
-        const userContext = await ZoomAppsSdk.getUserContext();
-        console.log(userContext);
-        setIsZoom(true);
-        setIsLoading(false);
-      } catch (error) {
-        setIsZoom(false);
-        setIsLoading(false);
-        console.log("Error in configureApp", error);
+          popoutSize: {width: 480, height: 360},
+          capabilities: ["shareApp"]
+        })
+        setIsZoom(true)
+        setIsLoading(false)
+      }catch(error){
+        setIsZoom(false)
+        setIsLoading(false)
+        console.log("Error in configureApp", error)
       }
     }
 
     configureApp();
-  }, []);
+  }, [])
+  
 
   const handleInstallClick = () => {
     window.location.href = "https://servezoommern.onrender.com/auth/install";
@@ -38,19 +53,20 @@ function App() {
 
   return (
     <Router>
-      <div className="container mt-3 " style={{ height: "90vh" }}>
+      <div className="container mt-3 " style={{height:"90vh"}}>
         {!isZoom && !isLoading && (
+
           <div>
             <h1 className="mb-4">Zoom App (MERN)</h1>
-            <p>
-              Running in:{" "}
-              {isZoom === null ? "Loading..." : isZoom ? "Zoom" : "Browser"}
-            </p>
+            <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
 
-            <button onClick={handleInstallClick} className="btn btn-dark my-3">
-              Install App
-            </button>
+            <button 
+              onClick={handleInstallClick} 
+              className="btn btn-dark my-3">
+                Install App
+            </button> 
           </div>
+
         )}
 
         {isZoom && (
@@ -79,6 +95,7 @@ function App() {
             >
               Past Meetings
             </Link>
+            {/* <Zoom /> */}
           </div>
         )}
 
