@@ -79,7 +79,7 @@ function App() {
             </Link>
             <Link
               className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
-              to="/schedule"
+              to="/"
             >
               Schedule Meeting
             </Link>
@@ -100,7 +100,7 @@ function App() {
         )}
 
         <Routes>
-          <Route path="/schedule" element={<ScheduleMeeting />} />
+          <Route path="/" element={<ScheduleMeeting />} />
           <Route path="/upcoming" element={<UpcomingMeetings />} />
           <Route path="/past" element={<PastMeetings />} />
           <Route path="/active" element={<ActiveMeeting />} />
