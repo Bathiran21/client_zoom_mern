@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from "react-router-dom";
 import ZoomAppsSdk from "@zoom/appssdk";
 import ScheduleMeeting from "./pages/ScheduleMeeting";
 import UpcomingMeetings from "./pages/UpcomingMeetings";
@@ -9,28 +15,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [isZoom, setIsZoom] = useState(null);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-  
-  useEffect(()=> {
+  useEffect(() => {
     async function configureApp() {
-    try{
+      try {
         const configResponse = await ZoomAppsSdk.config({
-          popoutSize: {width: 480, height: 360},
-          capabilities: ["shareApp"]
-        })
-        setIsZoom(true)
-        setIsLoading(false)
-      }catch(error){
-        setIsZoom(false)
-        setIsLoading(false)
-        console.log("Error in configureApp", error)
+          popoutSize: { width: 480, height: 360 },
+          capabilities: ["shareApp"],
+        });
+        setIsZoom(true);
+        setIsLoading(false);
+      } catch (error) {
+        setIsZoom(false);
+        setIsLoading(false);
+        console.log("Error in configureApp", error);
       }
     }
 
     configureApp();
-  }, [])
-  
+  }, []);
 
   const handleInstallClick = () => {
     window.location.href = "https://servezoommern.onrender.com/auth/install";
@@ -38,55 +42,72 @@ function App() {
 
   return (
     <Router>
-      <div className="container mt-3 " style={{height:"90vh"}}>
+      <div className="container mt-3 " style={{ height: "90vh" }}>
         {!isZoom && !isLoading && (
-
           <div>
             <h1 className="mb-4">Zoom App (MERN)</h1>
-            <p>Running in: {isZoom === null ? 'Loading...' : isZoom ? 'Zoom' : 'Browser'}</p>
+            <p>
+              Running in:{" "}
+              {isZoom === null ? "Loading..." : isZoom ? "Zoom" : "Browser"}
+            </p>
 
-            <button 
-              onClick={handleInstallClick} 
+            <button
+              onClick={handleInstallClick}
               className="btn btn-dark my-3"
               type="button"
-              >
-                Install App
-            </button> 
+            >
+            Install App
+            </button>
           </div>
-
         )}
 
         {isZoom && (
-        
-          <div className="d-flex justify-content-between gap-3 p-3 text-white flex-wrap">
-            <Link
-              className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
+          <div className="d-flex justify-content-between gap-3 p-3 flex-wrap">
+            <NavLink
               to="/active"
+              className={({ isActive }) =>
+                `text-decoration-none flex-fill text-center py-2 rounded ${
+                  isActive ? "text-dark bg-warning" : "text-white bg-dark"
+                }`
+              }
             >
               Active Meeting
-            </Link>
-            <Link
-              className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
+            </NavLink>
+            <NavLink
               to="/schedule"
+              className={({ isActive }) =>
+                `text-decoration-none flex-fill text-center py-2 rounded ${
+                  isActive ? "text-dark bg-warning" : "text-white bg-dark"
+                }`
+              }
             >
               Schedule Meeting
-            </Link>
-            <Link
-              className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
+            </NavLink>
+            <NavLink
               to="/upcoming"
+              className={({ isActive }) =>
+                `text-decoration-none flex-fill text-center py-2 rounded ${
+                  isActive ? "text-dark bg-warning" : "text-white bg-dark"
+                }`
+              }
             >
               Upcoming Meetings
-            </Link>
-            <Link
-              className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
+            </NavLink>
+            <NavLink
               to="/past"
+              className={({ isActive }) =>
+                `text-decoration-none flex-fill text-center py-2 rounded ${
+                  isActive ? "text-dark bg-warning" : "text-white bg-dark"
+                }`
+              }
             >
               Past Meetings
-            </Link>
+            </NavLink>
           </div>
         )}
 
         <Routes>
+          <Route path="/" element={<Navigate to="/schedule" />} />
           <Route path="/schedule" element={<ScheduleMeeting />} />
           <Route path="/upcoming" element={<UpcomingMeetings />} />
           <Route path="/past" element={<PastMeetings />} />
