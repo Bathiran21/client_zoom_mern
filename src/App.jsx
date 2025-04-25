@@ -11,21 +11,6 @@ function App() {
   const [isZoom, setIsZoom] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
-  //   // Configure the SDK with the necessary capabilities
-  //   ZoomAppsSdk.config({ capabilities: ["getUserContext"] });
-  
-  //   // Try to get the user context to determine if it's inside Zoom
-  //   ZoomAppsSdk.getUserContext()
-  //     .then((ctx) => {
-  //       console.log("Zoom context:", ctx);
-  //       setIsZoom(true);  // Inside Zoom
-  //     })
-  //     .catch((err) => {
-  //       console.error("Not running inside Zoom", err);
-  //       setIsZoom(false); // Not inside Zoom
-  //     });
-  // }, []);  
   
   useEffect(()=> {
     async function configureApp() {
@@ -62,7 +47,9 @@ function App() {
 
             <button 
               onClick={handleInstallClick} 
-              className="btn btn-dark my-3">
+              className="btn btn-dark my-3"
+              type="button"
+              >
                 Install App
             </button> 
           </div>
@@ -70,6 +57,7 @@ function App() {
         )}
 
         {isZoom && (
+        
           <div className="d-flex justify-content-between gap-3 p-3 text-white flex-wrap">
             <Link
               className="text-white text-decoration-none flex-fill text-center py-2 bg-dark rounded"
@@ -95,6 +83,13 @@ function App() {
             >
               Past Meetings
             </Link>
+            <button 
+              type="button"
+              onClick={handleInstallClick} 
+              className="btn btn-dark my-3"
+            >
+              Install App
+            </button> 
           </div>
         )}
 
