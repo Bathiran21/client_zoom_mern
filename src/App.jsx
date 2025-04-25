@@ -83,13 +83,6 @@ function App() {
             >
               Past Meetings
             </Link>
-            <button 
-              type="button"
-              onClick={handleInstallClick} 
-              className="btn btn-dark my-3"
-            >
-              Install App
-            </button> 
           </div>
         )}
 
